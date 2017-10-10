@@ -1,6 +1,7 @@
 <md-list>
-  <md-list-item *ngFor="let ct of contacts" [routerLink]="['/contacts', ct.id]">
+  <md-list-item *ngFor="let ct of contacts | async" [routerLink]="['/contact', ct.id]">
     <img md-list-avatar [src]="ct.image" alt="ct.name">
     <h3 md-line>{{ct.name}}</h3>
+    <button *ngIf="ct" [routerLink]="['/contact', ct?.id, 'edit']" title="Edit {{ct?.name}}">Edit</button>
   </md-list-item>
 </md-list>
