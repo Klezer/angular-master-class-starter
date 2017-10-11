@@ -20,7 +20,6 @@ import { TabsComponent } from './tabs/tabs/tabs.component';
 
 import { EventBusService } from './event-bus.service';
 import { ContactsDashboardComponent } from './contacts-dashboard/contacts-dashboard.component';
-import { AboutComponent } from './about/about.component';
 import { ContactsResolver } from './shared/contacts.resolver';
 import { ContactsService } from './contacts.service';
 
@@ -43,8 +42,7 @@ import { ContactsService } from './contacts.service';
     ContactDetailViewComponent,
     TabComponent,
     TabsComponent,
-    ContactsDashboardComponent,
-    AboutComponent
+    ContactsDashboardComponent
   ],
   providers: [
     EventBusService,
