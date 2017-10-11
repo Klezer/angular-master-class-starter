@@ -13,6 +13,14 @@ import { ContactsAppComponent } from './app.component';
 import { ContactsListComponent } from './contacts-list/contacts-list.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { ContactsEditorComponent } from './contacts-editor/contacts-editor.component';
+import { ContactDetailViewComponent } from './contact-details-view/contact-details-view.component';
+
+import { TabComponent } from './tabs/tab/tab.component';
+import { TabsComponent } from './tabs/tabs/tabs.component';
+
+import { EventBusService } from './event-bus.service';
+import { ContactsDashboardComponent } from './contacts-dashboard/contacts-dashboard.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   imports: [
@@ -29,8 +37,23 @@ import { ContactsEditorComponent } from './contacts-editor/contacts-editor.compo
     ContactsAppComponent,
     ContactsListComponent,
     ContactDetailsComponent,
-    ContactsEditorComponent]
+    ContactsEditorComponent,
+    ContactDetailViewComponent,
+    TabComponent,
+    TabsComponent,
+    ContactsDashboardComponent,
+    AboutComponent
+  ],
+  providers: [ EventBusService,
+    {
+      provide: 'ConfirmNavigationGuard',
+      useValue: doConfirm
+    } ]
 })
 export class ContactsModule {
 
+}
+
+export function doConfirm(component) {
+  return !component.warnOnClosing || window.confirm('Navigate away without saving?');
 }

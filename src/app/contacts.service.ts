@@ -16,7 +16,7 @@ export class ContactsService {
 
   constructor(private http: HttpClient) { }
 
-  public getContacts(): Observable<Contact[]> {
+  public getContacts(): Observable<Array<Contact>> {
     return this.http
       .get<ContactsResponse>(this.API_ENDPOINT + '/api/contacts')
       .map(d => d.items);
@@ -37,5 +37,12 @@ export class ContactsService {
     return this.http
       .put<ContactResponse>(url, contact)
       .map(data => data.item);
+  }
+
+  public search(term: string): Observable<Array<Contact>> {
+    let url = this.API_ENDPOINT + '/api/search?text=' + term;
+    return this.http
+    .get<ContactsResponse>(url)
+    .map(data => data.items);
   }
 }

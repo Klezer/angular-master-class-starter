@@ -1,3 +1,4 @@
+import { EventBusService } from './event-bus.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class ContactsAppComponent implements OnInit {
   public title = 'Angular Master Class setup works!';
 
-  constructor() {
+  constructor(private eventBusService: EventBusService) {
   }
 
   ngOnInit(): void {
+    this.eventBusService.observe('appTitleChange')
+    .subscribe(title => this.title = title);
   }
 }

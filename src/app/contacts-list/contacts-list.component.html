@@ -1,7 +1,13 @@
+<md-toolbar>
+  <md-input-container dividerColor="accent" class="trm-search-container">
+    <input mdInput type="text" (input)="term$.next($event.target.value)">
+  </md-input-container>
+  <md-icon color="accent">search</md-icon>
+</md-toolbar>
 <md-list>
-  <md-list-item *ngFor="let ct of contacts | async" [routerLink]="['/contact', ct.id]">
-    <img md-list-avatar [src]="ct.image" alt="ct.name">
-    <h3 md-line>{{ct.name}}</h3>
-    <button md-button *ngIf="ct" [routerLink]="['/contact', ct?.id, 'edit']" title="Edit {{ct?.name}}">Edit</button>
-  </md-list-item>
+  <a md-list-item *ngFor="let contact of contacts$ | async; trackBy: trackedByContactId"
+    [routerLink]="['/contact', contact.id]" routerLinkActive="active">
+    <img md-list-avatar [src]="contact.image" alt="Picture of {{contact.name}}" />
+    <h3 md-line>{{contact.name}}</h3>
+  </a>
 </md-list>

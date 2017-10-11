@@ -1,28 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { ContactsService } from '../contacts.service';
-import { Contact} from '../models/contact';
-import 'rxjs/add/operator/switchMap';
-import { Subscription } from "rxjs/Subscription";
-import { Observable } from "rxjs/Observable";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Contact } from '../models/contact'
 
 @Component({
   selector: 'trm-contact-details',
   templateUrl: './contact-details.component.html',
-  styleUrls: ['./contact-details.component.css'],
-  providers: [
-    ContactsService
-  ]
+  styleUrls: ['./contact-details.component.css']
 })
 export class ContactDetailsComponent implements OnInit {
-  public contact: Contact;
+  @Input() contact: Contact;
 
-  constructor(private contactsService: ContactsService, private route: ActivatedRoute) { }
+  @Output() edit = new EventEmitter<Contact>();
+
+  constructor() { }
 
   ngOnInit() {
-    let contactId = this.route.snapshot.paramMap.get('id');
-    this.contactsService
-      .getContact(contactId)
-      .subscribe(data => this.contact = data);
+
   }
+
 }
