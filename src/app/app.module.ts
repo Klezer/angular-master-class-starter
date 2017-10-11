@@ -21,6 +21,8 @@ import { TabsComponent } from './tabs/tabs/tabs.component';
 import { EventBusService } from './event-bus.service';
 import { ContactsDashboardComponent } from './contacts-dashboard/contacts-dashboard.component';
 import { AboutComponent } from './about/about.component';
+import { ContactsResolver } from './shared/contacts.resolver';
+import { ContactsService } from './contacts.service';
 
 @NgModule({
   imports: [
@@ -44,11 +46,15 @@ import { AboutComponent } from './about/about.component';
     ContactsDashboardComponent,
     AboutComponent
   ],
-  providers: [ EventBusService,
+  providers: [
+    EventBusService,
     {
       provide: 'ConfirmNavigationGuard',
       useValue: doConfirm
-    } ]
+    },
+    ContactsService,
+    ContactsResolver
+   ]
 })
 export class ContactsModule {
 

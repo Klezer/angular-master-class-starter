@@ -4,14 +4,24 @@ import { ContactDetailViewComponent } from './contact-details-view/contact-detai
 import { ContactsEditorComponent } from './contacts-editor/contacts-editor.component';
 import { ContactsDashboardComponent } from './contacts-dashboard/contacts-dashboard.component';
 
+import { ContactsResolver } from './shared/contacts.resolver';
+
 export const APP_ROUTES = [
   {
     path: '',
     component: ContactsDashboardComponent,
     children: [
       { path: '', redirectTo: 'contact/0', pathMatch: 'full' },
-      { path: 'contact/:id', component: ContactDetailViewComponent },
-      { path: 'contact/:id/edit', component: ContactsEditorComponent, canDeactivate: ['ConfirmNavigationGuard'] }
+      { path: 'contact/:id', component: ContactDetailViewComponent,
+        resolve: {
+          contact: ContactsResolver
+        }
+      },
+      { path: 'contact/:id/edit', component: ContactsEditorComponent,
+      canDeactivate: ['ConfirmNavigationGuard'],
+        resolve: {
+          contact: ContactsResolver
+        } }
     ]
   },
   { path: 'about', component: AboutComponent },

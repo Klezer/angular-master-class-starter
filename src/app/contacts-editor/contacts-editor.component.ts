@@ -18,8 +18,8 @@ export class ContactsEditorComponent implements OnInit {
   constructor(private contactsService: ContactsService, private route: ActivatedRoute, private router: Router, private eventBusService: EventBusService) { }
 
   ngOnInit() {
-    this.route.paramMap
-    .switchMap(paramMap => this.contactsService.getContact(paramMap.get('id')))
+    this.route.data
+    .map(data => data['contact'])
     .subscribe(contact => {
       this.contact = contact;
       this.eventBusService.emit('appTitleChange', 'Edit Contact Details - ' + contact.name);
